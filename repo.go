@@ -2,42 +2,38 @@ package main
 
 import "fmt"
 
-var currentId int
+var nextId int
 
 var todoRepo Todos
 
 //create seed data
 func init() {
 	todoRepo = make(map[int]Todo)
-	currentId = 0
-	RepoCreateTodo(Todo{Name: "Write presentation?"})
-	RepoCreateTodo(Todo{Name: "Host meetup!"})
+	nextId = 0
+	RepoCreateTodo(Todo{Name: "Make more todos."})
 }
 
 func RepoFindTodo(id int) Todo {
-	for _, t := range todoRepo {
-		if t.Id == id {
-			return t
-		}
+	todo, ok := todoRepo[id]
+	if !ok {
+		//return empty todo if none found
+		return Todo{}
 	}
-	//return empty todo if none found
-	return Todo{}
+	return todo
 }
 
 func RepoCreateTodo(t Todo) Todo {
-	currentId += 1
-	t.Id = currentId
-	todoRepo = append(todoRepo, t)
+	t.Id = nextId
+	todoRepo[nextId] = t
+	nextId += 1
 	return t
 }
 
 func RepoDestroyTodo(id int) error {
-	for i, t := range todoRepo {
-		if t.Id == id {
-			todoRepo = append(todoRepo[:i], todoRepo[i+1:]...)
-			return nil
-		}
+	_, ok := todoRepo[id]
+	if !ok {
+		return fmt.Errorf("Could not find todo with id %d to delete", id)
 	}
-
-	return fmt.Errorf("Could not find todo with id %d to delete", id)
+	delete(todoRepo, id)
+	return nil
 }

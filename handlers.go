@@ -16,16 +16,15 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodoIndex(w http.ResponseWriter, r *http.Request) {
-	var todos Todos
-	for i, t := range todoRepo {
-		//I don't know how to put this in the for body so I'm hacking in here
-		if i > currentId-5 { //only give the 5 latest todos
-			todos = append(todos, t)
-		}
-
+	var todos []Todo
+	firstToShow := nextId - 5
+	if firstToShow < 0 {
+		firstToShow = 0
 	}
-	// todos = append(todos, RepoFindTodo(1))
-	// todos = append(todos, RepoFindTodo(2))
+	for i := firstToShow; i < nextId; i++ {
+		t := RepoFindTodo(i)
+		todos = append(todos, t)
+	}
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
@@ -52,7 +51,6 @@ func TodoShow(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	//fmt.Fprintf(w, "Todo show: %v", todoId)
 }
 
 func TodoCreate(w http.ResponseWriter, r *http.Request) {
@@ -94,7 +92,9 @@ func TodoDelete(w http.ResponseWriter, r *http.Request) {
 	RepoDestroyTodo(todoId)
 }
 
+//WIP
 func TodoUpdate(w http.ResponseWriter, r *http.Request) {
+	var todo Todo
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
 	if err != nil {
 		panic(err)

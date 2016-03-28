@@ -9,4 +9,4 @@ type Todo struct {
 	Id        int       `json: "id"`
 }
 
-type Todos []Todo
+type Todos map[int]Todo
