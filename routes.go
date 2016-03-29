@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/metaregress/api/todos"
 	"net/http"
 )
 
@@ -13,47 +14,11 @@ type Route struct {
 
 type Routes []Route
 
-var routes = Routes{
-	Route{
-		"Index",
-		"GET",
-		"/",
-		Index,
-	},
-	Route{
-		"TodoIndex",
-		"GET",
-		"/todo",
-		TodoIndex,
-	},
-	Route{
-		"TodoShow",
-		"GET",
-		"/todo/{todoId}",
-		TodoShow,
-	},
-	Route{
-		"TodoShow",
-		"DELETE",
-		"/todo/{todoId}",
-		TodoDelete,
-	},
-	Route{
-		"TodoCreate",
-		"POST",
-		"/todo",
-		TodoCreate,
-	},
-	Route{
-		"TodoDelete",
-		"DELETE",
-		"/todo",
-		TodoDelete,
-	},
-	Route{
-		"TodoUpdate",
-		"PATCH",
-		"/todo/{todoId}",
-		TodoUpdate,
-	},
-}
+var routes = todos.GetRoutes()
+
+// routes.append(Route{
+// 		"Index",
+// 		"GET",
+// 		"/",
+// 		Index,
+// 	},)
