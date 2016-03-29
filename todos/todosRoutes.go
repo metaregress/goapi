@@ -1,50 +1,41 @@
 package todos
 
 import (
-	"net/http"
+	"github.com/metaregress/api/apiutil"
 )
 
-type Route struct {
-	Name        string
-	Method      string
-	Pattern     string
-	HandlerFunc http.HandlerFunc
-}
-
-type Routes []Route
-
-var routes = Routes{
-	Route{
+var routes = apiutil.Routes{
+	apiutil.Route{
 		"TodoIndex",
 		"GET",
 		"/todo",
 		TodoIndex,
 	},
-	Route{
+	apiutil.Route{
 		"TodoShow",
 		"GET",
 		"/todo/{todoId}",
 		TodoShow,
 	},
-	Route{
+	apiutil.Route{
 		"TodoShow",
 		"DELETE",
 		"/todo/{todoId}",
 		TodoDelete,
 	},
-	Route{
+	apiutil.Route{
 		"TodoCreate",
 		"POST",
 		"/todo",
 		TodoCreate,
 	},
-	Route{
+	apiutil.Route{
 		"TodoDelete",
 		"DELETE",
 		"/todo",
 		TodoDelete,
 	},
-	Route{
+	apiutil.Route{
 		"TodoUpdate",
 		"PATCH",
 		"/todo/{todoId}",
@@ -52,6 +43,6 @@ var routes = Routes{
 	},
 }
 
-func GetRoutes() Routes {
+func GetRoutes() apiutil.Routes {
 	return routes
 }

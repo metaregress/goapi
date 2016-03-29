@@ -1,24 +1,18 @@
 package main
 
 import (
+	"github.com/metaregress/api/apiutil"
 	"github.com/metaregress/api/todos"
-	"net/http"
 )
 
-type Route struct {
-	Name        string
-	Method      string
-	Pattern     string
-	HandlerFunc http.HandlerFunc
+func GetRoutes() apiutil.Routes {
+	var routes = todos.GetRoutes()
+	routes = append(routes, apiutil.Route{
+		"Index",
+		"GET",
+		"/",
+		Index,
+	})
+
+	return routes
 }
-
-type Routes []Route
-
-var routes = todos.GetRoutes()
-
-// routes.append(Route{
-// 		"Index",
-// 		"GET",
-// 		"/",
-// 		Index,
-// 	},)
