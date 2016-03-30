@@ -30,12 +30,6 @@ var routes = apiutil.Routes{
 		TodoCreate,
 	},
 	apiutil.Route{
-		"TodoDelete",
-		"DELETE",
-		"/todo",
-		TodoDelete,
-	},
-	apiutil.Route{
 		"TodoUpdate",
 		"PATCH",
 		"/todo/{todoId}",
