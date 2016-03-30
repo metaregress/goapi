@@ -19,7 +19,7 @@ type Race struct {
 
 var acrobatics = Skill{Name: "Acrobatics", Actions: []string{"leap over a pit", "walk across a rope", "scale a cliff"}}
 var animalHandling = Skill{Name: "Animal Handling", Actions: []string{"calm a horse", "train a dog", "coax a cat", "intimidate a wildcat"}}
-var athletics = Skill{Name: "Atheltics", Actions: []string{"leap over a pit", "climb a rope", "scale a cliff", "open a door", "cling to a troll's back"}}
+var athletics = Skill{Name: "Athletics", Actions: []string{"leap over a pit", "climb a rope", "scale a cliff", "open a door", "cling to a troll's back"}}
 var arcana = Skill{Name: "Arcana", Actions: []string{"read a scroll", "examine a spellbook", "recall a spell's details"}}
 var deception = Skill{Name: "Deception", Actions: []string{"fool a shopkeeper", "befuddle a guard", "hoodwink a noble", "pretend not to notice a tail"}}
 var history = Skill{Name: "History", Actions: []string{"recall a battle", "recognize an ancient crest", "date a ruin"}}
